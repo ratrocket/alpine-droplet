@@ -7,6 +7,38 @@ Forked from https://github.com/benpye/alpine-droplet.  There's an
 that goes along with this repo.  ([Archive
 link](https://web.archive.org/web/20240222015631/https://curlybracket.co.uk/blog/running-alpine-linux-on-digital-ocean/))
 
+## Dealing with the git submodule
+
+([Git submodule
+docs](https://git-scm.com/book/en/v2/Git-Tools-Submodules))
+
+### initial setup
+
+After you clone this repo, to set up the submodule:
+
+- `cd alpine-make-vm-image/`
+- `git submodule init`
+- `git submodule update`
+
+OR, you can git clone with the `--recurse-submodules` switch:
+
+`git clone --recurse-submodules https://github.com/ratrocket/alpine-droplet`
+
+### keeping the submodule up-to-date
+
+Method 1:
+
+`cd alpine-make-vm-image`, `git fetch`, `git merge`
+
+To show changes: `cd ..`, `git diff --submodule`
+
+(can do `git config --global diff.submodule log` to not have to use
+`--submodule` switch)
+
+Method 2:
+
+`git submodule update --remote`
+
 ## Resume (mostly) original README
 
 ![Build Status](https://github.com/ratrocket/alpine-droplet/actions/workflows/build.yml/badge.svg?branch=master)
