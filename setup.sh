@@ -3,6 +3,10 @@
 # Enable openssh server
 rc-update add sshd default
 
+# Log rc system to find errors
+# Logs will be in /var/log/rc.log
+sed -i 's/#rc_logger="NO"/rc_logger="YES"/' /etc/rc.conf
+
 # Configure networking
 cat > /etc/network/interfaces <<-EOF
 iface lo inet loopback
