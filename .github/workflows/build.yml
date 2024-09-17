@@ -32,7 +32,7 @@ jobs:
         id: getversion
         run: echo "::set-output name=version::$(cat version)"
 
-      - uses: slord399/action-automatic-releases@latest
+      - uses: slord399/action-automatic-releases@v1.0.1
         if: github.ref == 'refs/heads/master'
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
