@@ -12,8 +12,8 @@ fi
 V=`lynx -dump https://dl-cdn.alpinelinux.org/alpine/ | \
 	sed -n '/^References/,$p' | \
 	awk '$1 ~ /^[0-9]/ {print $2}' | \
-	grep 'alpine/v' | \
-	xargs basename | \
+	grep --color=never 'alpine/v' | \
+	xargs basename -s"/" | \
 	sort -Vr | \
 	sed 1q`
 
