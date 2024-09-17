@@ -7,6 +7,16 @@ Forked from https://github.com/benpye/alpine-droplet.  There's an
 that goes along with this repo.  ([Archive
 link](https://web.archive.org/web/20240222015631/https://curlybracket.co.uk/blog/running-alpine-linux-on-digital-ocean/))
 
+## List of Alpine branches
+
+To provide argument to `--branch` for the `alpine-make-vm-image` script,
+which in my version of this, is required (just to get a good filename).
+
+https://alpinelinux.org/releases/
+
+(UPDATE: the `build-image.sh` gets the latest explicit version number
+using lynx and a bunch of other stuff.)
+
 ## Dealing with the git submodule
 
 ([Git submodule
@@ -75,3 +85,6 @@ Get name of image to be
 is the alpine version (eg, "3.15") and hash is a commit hash from the
 alpine repo.  I realize the hash might be pushing it -- version alone
 would ok!
+
+UPDATE: partially done.  Got the version number, I'll give up on the
+hash.
