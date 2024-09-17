@@ -1,8 +1,22 @@
 # Digital Ocean Alpine Linux Image Generator
 
-![Build Status](https://github.com/benpye/alpine-droplet/actions/workflows/build.yml/badge.svg?branch=master)
+## Note
 
-This is a tool to generate an Alpine Linux custom image for Digital Ocean. This ensures that the droplet will correctly configure networking and SSH on first boot using Digital Ocean's metadata service. To use this tool make sure you have `qemu-nbd`, `qemu-img`, `bzip2` and `e2fsprogs` installed. This will not work under the Windows Subsystem for Linux (WSL) as it mounts the image during generation.
+Forked from https://github.com/benpye/alpine-droplet.  There's an
+[article](https://curlybracket.co.uk/blog/running-alpine-linux-on-digital-ocean/)
+that goes along with this repo.  ([Archive
+link](https://web.archive.org/web/20240222015631/https://curlybracket.co.uk/blog/running-alpine-linux-on-digital-ocean/))
+
+## Resume (mostly) original README
+
+![Build Status](https://github.com/ratrocket/alpine-droplet/actions/workflows/build.yml/badge.svg?branch=master)
+
+This is a tool to generate an Alpine Linux custom image for Digital
+Ocean. This ensures that the droplet will correctly configure networking
+and SSH on first boot using Digital Ocean's metadata service. To use
+this tool make sure you have `qemu-nbd`, `qemu-img`, `bzip2` and
+`e2fsprogs` installed. This will not work under the Windows Subsystem
+for Linux (WSL) as it mounts the image during generation.
 
 Once these prerequisites are installed run:
 
@@ -12,6 +26,20 @@ Once these prerequisites are installed run:
 
 Note: Need root permission.
 
-This will produce `alpine-virt-image-{timestamp}.qcow2.bz2` which can then be uploaded to Digital Ocean and used to create your droplet. Check out their instructions at https://blog.digitalocean.com/custom-images/ for uploading the image and creating your droplet.
+This will produce `alpine-virt-image-{timestamp}.qcow2.bz2` which can
+then be uploaded to Digital Ocean and used to create your droplet. Check
+out their instructions at https://blog.digitalocean.com/custom-images/
+for uploading the image and creating your droplet.
 
-In this commit, the script will produce alpine `version 3.15` image. If you wanna build latest version, you can pull latest [alpine-make-vm-image repo](https://github.com/alpinelinux/alpine-make-vm-image): `git submodule foreach git pull origin master`
+In this commit, the script will produce alpine `version 3.15` image. If
+you wanna build latest version, you can pull latest
+[alpine-make-vm-image repo](https://github.com/alpinelinux/alpine-make-vm-image):
+`git submodule foreach git pull origin master`.
+
+## TODO
+
+Get name of image to be
+`alpine-virt-image-{version}-{hash}-{timestamp}.qcow2.bz2` where version
+is the alpine version (eg, "3.15") and hash is a commit hash from the
+alpine repo.  I realize the hash might be pushing it -- version alone
+would ok!
