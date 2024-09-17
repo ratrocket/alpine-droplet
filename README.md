@@ -78,19 +78,28 @@ Once these prerequisites are installed run:
 
 Note: Need root permission.
 
-This will produce `alpine-virt-image-{timestamp}.qcow2.bz2` which can
-then be uploaded to Digital Ocean and used to create your droplet. Check
-out their instructions at https://blog.digitalocean.com/custom-images/
-for uploading the image and creating your droplet.
+This will produce `alpine-virt-image-{version}-{timestamp}.qcow2.bz2`
+which can then be uploaded to Digital Ocean and used to create your
+droplet. Check out their instructions at
+https://blog.digitalocean.com/custom-images/ for uploading the image and
+creating your droplet.
 
-In this commit, the script will produce alpine `version 3.15` image. If
+The image will have a user named "alp" that is in the wheel group, so
+ready to `doas`, but `doas` isn't installed yet.  `bash` and `ufw` are
+installed, and `ufw` is configured fairly restrictively (see setup.sh).
+
+Also, the repo is setup to run a Github Action on pushing to master that
+will run `build-image.sh` for you and put the generated image
+[here](https://github.com/ratrocket/alpine-droplet/tags).
+
+~~In this commit, the script will produce alpine `version 3.15` image. If
 you wanna build latest version, you can pull latest
 [alpine-make-vm-image repo](https://github.com/alpinelinux/alpine-make-vm-image):
-`git submodule foreach git pull origin master`.
+`git submodule foreach git pull origin master`.~~  This doesn't apply.
 
 ## TODO
 
-Get name of image to be
+[DONE enough] Get name of image to be
 `alpine-virt-image-{version}-{hash}-{timestamp}.qcow2.bz2` where version
 is the alpine version (eg, "3.15") and hash is a commit hash from the
 alpine repo.  I realize the hash might be pushing it -- version alone
