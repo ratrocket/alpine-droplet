@@ -7,6 +7,16 @@ Forked from https://github.com/benpye/alpine-droplet.  There's an
 that goes along with this repo.  ([Archive
 link](https://web.archive.org/web/20240222015631/https://curlybracket.co.uk/blog/running-alpine-linux-on-digital-ocean/))
 
+## Deprectation warning in Github Action
+
+Using "set-output" is deprecated, but they're delaying its removal, so
+I'm not going to worry about it now.  I don't understand how to modify
+the line using "set-output" by the example in the following link, so...
+
+More info:
+
+https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/
+
 ## List of Alpine branches
 
 To provide argument to `--branch` for the `alpine-make-vm-image` script,
