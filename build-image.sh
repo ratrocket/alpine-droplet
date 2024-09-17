@@ -27,7 +27,7 @@ then
 fi
 
 ./alpine-make-vm-image/alpine-make-vm-image \
-	--branch "${V}"
+	--branch $V \
 	--packages "openssh e2fsprogs-extra" \
 	--script-chroot \
 	--image-format qcow2 \
