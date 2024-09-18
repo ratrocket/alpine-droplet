@@ -87,28 +87,32 @@ ufw allow out 80/tcp  # allow outgoing HTTP traffic
 
 yes | ufw enable     # enable the firewall
 rc-update add ufw    # add UFW init scripts
-# do `ufw status` to check on it
+# do "ufw status" to check on it
 
 # I'll try anything RN.
 sleep 5
 
 USERNAME=alp
+HOMEDIR="/home/$${USERNAME}"
 
 # create user, then add user to two groups
-adduser -h "/home/${USERNAME}" -s /bin/ash -D "${USERNAME}"
-adduser "${USERNAME}" "${USERNAME}"
-adduser "${USERNAME}" wheel
+adduser -h "$${HOMEDIR}" -s /bin/ash -D "${USERNAME}"
+adduser "$${USERNAME}" "${USERNAME}"
+adduser "$${USERNAME}" wheel
 
-HOMEDIR="$(eval echo ~${USERNAME})"
+# This "eval" seems completely gratuitous.  HOMEDIR is set above now,
+# right after USERNAME.
+# HOMEDIR="$$(eval echo ~${USERNAME})"
 
-mkdir -p "${HOMEDIR}/.ssh"
+mkdir -p "$${HOMEDIR}/.ssh"
 cp /root/.ssh/authorized_keys "${HOMEDIR}/.ssh"
-chmod 0700 "${HOMEDIR}/.ssh"
-chmod 0600 "${HOMEDIR}/.ssh/authorized_keys"
-chown -R "${USERNAME}":"${USERNAME}" "${HOMEDIR}/.ssh"
+chmod 0700 "$${HOMEDIR}/.ssh"
+chmod 0600 "$${HOMEDIR}/.ssh/authorized_keys"
+chown -R "$${USERNAME}":"$${USERNAME}" "$${HOMEDIR}/.ssh"
 # password login for root is already disallowed
 
 rc-update del initial-setup default
+exit 0
 EOF
 
 # Create initial-setup OpenRC service
