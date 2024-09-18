@@ -70,9 +70,24 @@ rc-update add do-init default
 cat > /bin/initial-setup <<-EOF
 #!/bin/sh
 
-apk add \
+apk add --no-progress \
 	bash \
 	ufw
+
+# set up the firewall
+# cf. https://wiki.alpinelinux.org/wiki/Uncomplicated_Firewall
+ufw default deny incoming
+ufw default deny outgoing
+ufw limit SSH         # open SSH port and protect against brute-force login attacks
+ufw allow out 123/udp # allow outgoing NTP (Network Time Protocol)
+
+# The following instructions will allow apk to work:
+ufw allow out DNS     # allow outgoing DNS
+ufw allow out 80/tcp  # allow outgoing HTTP traffic
+
+yes | ufw enable     # enable the firewall
+rc-update add ufw    # add UFW init scripts
+# do `ufw status` to check on it
 
 USERNAME=alp
 
@@ -88,24 +103,7 @@ cp /root/.ssh/authorized_keys "${HOMEDIR}/.ssh"
 chmod 0700 "${HOMEDIR}/.ssh"
 chmod 0600 "${HOMEDIR}/.ssh/authorized_keys"
 chown -R "${USERNAME}":"${USERNAME}" "${HOMEDIR}/.ssh"
-
 # password login for root is already disallowed
-
-# set up the firewall
-# cf. https://wiki.alpinelinux.org/wiki/Uncomplicated_Firewall
-ufw default deny incoming
-ufw default deny outgoing
-ufw limit SSH         # open SSH port and protect against brute-force login attacks
-ufw allow out 123/udp # allow outgoing NTP (Network Time Protocol)
-
-# The following instructions will allow apk to work:
-ufw allow out DNS     # allow outgoing DNS
-ufw allow out 80/tcp  # allow outgoing HTTP traffic
-
-yes | ufw enable     # enable the firewall
-rc-update add ufw    # add UFW init scripts
-
-# do `ufw status` to check on it
 
 rc-update del initial-setup default
 EOF
@@ -115,6 +113,8 @@ cat > /etc/init.d/initial-setup <<-EOF
 #!/sbin/openrc-run
 depend() {
     need net.eth0
+    need localmount
+    need bootmisc
 }
 command="/bin/initial-setup
 command_args=""
