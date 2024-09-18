@@ -93,22 +93,22 @@ rc-update add ufw    # add UFW init scripts
 sleep 5
 
 USERNAME=alp
-HOMEDIR="/home/$${USERNAME}"
+HOMEDIR="/home/\${USERNAME}"
 
 # create user, then add user to two groups
-adduser -h "$${HOMEDIR}" -s /bin/ash -D "${USERNAME}"
-adduser "$${USERNAME}" "${USERNAME}"
-adduser "$${USERNAME}" wheel
+adduser -h "\${HOMEDIR}" -s /bin/ash -D "${USERNAME}"
+adduser "\${USERNAME}" "${USERNAME}"
+adduser "\${USERNAME}" wheel
 
 # This "eval" seems completely gratuitous.  HOMEDIR is set above now,
 # right after USERNAME.
-# HOMEDIR="$$(eval echo ~${USERNAME})"
+# HOMEDIR="\$(eval echo ~${USERNAME})"
 
-mkdir -p "$${HOMEDIR}/.ssh"
+mkdir -p "\${HOMEDIR}/.ssh"
 cp /root/.ssh/authorized_keys "${HOMEDIR}/.ssh"
-chmod 0700 "$${HOMEDIR}/.ssh"
-chmod 0600 "$${HOMEDIR}/.ssh/authorized_keys"
-chown -R "$${USERNAME}":"$${USERNAME}" "$${HOMEDIR}/.ssh"
+chmod 0700 "\${HOMEDIR}/.ssh"
+chmod 0600 "\${HOMEDIR}/.ssh/authorized_keys"
+chown -R "\${USERNAME}":"\${USERNAME}" "\${HOMEDIR}/.ssh"
 # password login for root is already disallowed
 
 rc-update del initial-setup default
