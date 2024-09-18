@@ -89,9 +89,6 @@ yes | ufw enable     # enable the firewall
 rc-update add ufw    # add UFW init scripts
 # do "ufw status" to check on it
 
-# I'll try anything RN.
-sleep 5
-
 USERNAME="alp"
 HOMEDIR="/home/\${USERNAME}"
 
