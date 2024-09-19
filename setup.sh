@@ -93,7 +93,7 @@ USERNAME="alp"
 HOMEDIR="/home/\${USERNAME}"
 
 # create user, then add user to two groups
-adduser -h "\${HOMEDIR}" -s /bin/ash -D "\${USERNAME}"
+adduser -h "\${HOMEDIR}" -s /bin/ash -g "Alp User" -D "\${USERNAME}"
 adduser "\${USERNAME}" "\${USERNAME}"
 adduser "\${USERNAME}" wheel
 
@@ -103,6 +103,14 @@ chmod 0700 "\${HOMEDIR}/.ssh"
 chmod 0600 "\${HOMEDIR}/.ssh/authorized_keys"
 chown -R "\${USERNAME}":"\${USERNAME}" "\${HOMEDIR}/.ssh"
 # password login for root is already disallowed
+# disallow it for all users:
+sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
+
+# add ~alp/.profile
+cat > "~\${USERNAME}/.profile" <<-END
+PATH="$HOME/bin:$PATH"; export PATH
+ENV=$HOME/.shinit; export ENV
+END
 
 rc-update del initial-setup default
 exit 0
