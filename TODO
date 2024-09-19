@@ -1,0 +1,69 @@
+notes on this file
+------------------
+
+"write down steps" = create scripts to do X
+
+the list
+--------
+
+- have my setup.sh (I think) write a new motd with instructions specific
+  to my setup (pointers to additional things you can do, etc)
+
+----------------------------------------------------------------------
+
+- figure out where/how /bin/ash is configured, what is its startup file?
+  Doesn't *seem* to be ~/.profile, OR doing `export VAR=thing` doesn't
+  work in /bin/ash?  (seek out busybox docs for this!)
+
+RESOLVED
+
+I was "checking" this by doing `su alp` from root, and then a
+`echo $PATH` (PATH was being set in alp's .profile).  PATH was empty...
+The problem was simply that the environment wasn't being cleared and the
+shell run as a login shell!  (And I *know* this too!)
+
+Solution is to do `su - alp` (or "-l"), then PATH will be there.
+
+Now I can set XDG_RUNTIME_DIR.
+
+----------------------------------------------------------------------
+
+- write down steps to get wayland running in alpine for the machine to
+  act as the server in a thin-client/server set up.  So: packages to
+  install, setting up XDG_RUNTIME_DIR (this is what the .profile
+  question is about), setting up seatd.  (more?)
+
+----------------------------------------------------------------------
+
+- write down steps to get an http server (more than likely, caddy) set
+  up.  So: packages to install, how to alter the ufw config, rc-stuff.
+
+----------------------------------------------------------------------
+
+- write down steps for setting up doas: packages to install (just doas,
+  I think), get a user set up (ensure group, set password, how to config
+  doas)
+
+----------------------------------------------------------------------
+
+- write down steps to get my user more comfortably set up (esp. for the
+  thin-client/server scenario): dotfiles, probably using bash, packages
+  to install (tmux definitely), ssh keys so I can access my private git
+  repos
+
+----------------------------------------------------------------------
+
+- write down steps to get man pages on the system (sort of part of
+  previous point also ^^^^^)
+
+----------------------------------------------------------------------
+
+- write down steps to get cron going: packages to install, setting up
+  some cron jobs
+
+----------------------------------------------------------------------
+
+Q: for a thin client, what IS the other end of the bargain called?  It's
+not "thick"... is it?  Is it just "the server"?
+
+----------------------------------------------------------------------

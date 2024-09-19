@@ -113,6 +113,10 @@ sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_
 # add ~alp/.profile
 cat > "\${HOMEDIR}/.profile" <<-END
 PATH="\${HOMEDIR}/bin:\$PATH"; export PATH
+
+# this allows you to put /bin/ash (which I think is dash??) config into
+# ~/.shinit.  I suppose you could also put that config here, though.
+# I'm not sure what the difference is.
 ENV="\${HOMEDIR}/.shinit"; export ENV
 END
 chown alp:alp "\${HOMEDIR}/.profile"
