@@ -97,6 +97,10 @@ adduser -h "\${HOMEDIR}" -s /bin/ash -g "Alp User" -D "\${USERNAME}"
 adduser "\${USERNAME}" "\${USERNAME}"
 adduser "\${USERNAME}" wheel
 
+# unlock USERNAME's account.  This allows ssh'ing in.  USERNAME still
+# has no password.
+passwd -u "\${USERNAME}"
+
 mkdir -p "\${HOMEDIR}/.ssh"
 cp /root/.ssh/authorized_keys "\${HOMEDIR}/.ssh"
 chmod 0700 "\${HOMEDIR}/.ssh"
