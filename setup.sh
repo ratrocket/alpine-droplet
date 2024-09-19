@@ -107,7 +107,7 @@ chown -R "\${USERNAME}":"\${USERNAME}" "\${HOMEDIR}/.ssh"
 sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
 
 # add ~alp/.profile
-cat > "~\${USERNAME}/.profile" <<-END
+cat > "\${HOMEDIR}/.profile" <<-END
 PATH="$HOME/bin:$PATH"; export PATH
 ENV=$HOME/.shinit; export ENV
 END
