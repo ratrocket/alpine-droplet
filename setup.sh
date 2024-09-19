@@ -108,9 +108,11 @@ sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_
 
 # add ~alp/.profile
 cat > "\${HOMEDIR}/.profile" <<-END
-PATH="\${HOME}/bin:\$PATH"; export PATH
-ENV="\${HOME}/.shinit"; export ENV
+PATH="\${HOMEDIR}/bin:\$PATH"; export PATH
+ENV="\${HOMEDIR}/.shinit"; export ENV
 END
+chown alp:alp "\${HOMEDIR}/.profile"
+chmod 0644 "\${HOMEDIR}/.profile"
 
 rc-update del initial-setup default
 exit 0
