@@ -6,16 +6,30 @@ notes on this file
 the list
 --------
 
+----------------------------------------------------------------------
+
 - have my setup.sh (I think) write a new motd with instructions specific
   to my setup (pointers to additional things you can do, etc)
 
 ----------------------------------------------------------------------
 
+- get some scripts (or at least docs) together to use the digital ocean
+  api to deal with listing/uploading/deleting images and
+  creating/destroying droplets.
+
+IN-PROGRESS
+
+in misc/do-api I have some curl commands
+
+----------------------------------------------------------------------
+
+RESOLVED
+
 - figure out where/how /bin/ash is configured, what is its startup file?
   Doesn't *seem* to be ~/.profile, OR doing `export VAR=thing` doesn't
   work in /bin/ash?  (seek out busybox docs for this!)
 
-RESOLVED
+SOLUTION
 
 I was "checking" this by doing `su alp` from root, and then a
 `echo $PATH` (PATH was being set in alp's .profile).  PATH was empty...
@@ -48,18 +62,52 @@ Now I can set XDG_RUNTIME_DIR.
 
 - write down steps to get my user more comfortably set up (esp. for the
   thin-client/server scenario): dotfiles, probably using bash, packages
-  to install (tmux definitely), ssh keys so I can access my private git
-  repos
+  to install (tmux definitely, outils), ssh keys so I can access my
+  private git repos, also go configuration so `go get` can access my
+  private repos
 
 ----------------------------------------------------------------------
 
 - write down steps to get man pages on the system (sort of part of
   previous point also ^^^^^)
 
+IN-PROGRESS
+
+apk add     \
+man-pages   \
+mandoc      \
+mandoc-doc  \
+openrc-doc  \
+ufw-doc     \
+busybox-doc
+
 ----------------------------------------------------------------------
 
 - write down steps to get cron going: packages to install, setting up
   some cron jobs
+
+----------------------------------------------------------------------
+
+- IDEA: for all of the "write down steps to" things listed in this
+  document (wdst), I'm wondering if I could make them "modular", in the
+  sense that you could specify which ones you want (as arguments to
+  `build-image.sh`, I think), and then the `setup.sh` in your image will
+  create a `/bin/initial-setup` that includes all the "modules" you
+  want.  So on top of the base setup, you can choose the
+
+  - http module, caddy variant
+  - interactive qol module
+  - doas module (nb, setting the alp user's password will *always*
+    require the human)
+  - man pages module (Q: is there a way to tell apk to always install
+    the associated "-doc" package when the package itself is installed?)
+  - cron module (not sure this is necessary or useful)
+  - remote desktop module (although I've tried now to get this going
+    with wayland *and* with xrdp/remmina, and neither worked out)
+
+  I'm not sure how complex this would be, and maybe it isn't worth it
+  (and just taking an ad hoc approach to "enabling" these "modules" is
+  totally fine).
 
 ----------------------------------------------------------------------
 

@@ -119,7 +119,8 @@ PATH="\${HOMEDIR}/bin:\$PATH"; export PATH
 # I'm not sure what the difference is.
 ENV="\${HOMEDIR}/.shinit"; export ENV
 END
-chown alp:alp "\${HOMEDIR}/.profile"
+# chown alp:alp "\${HOMEDIR}/.profile"
+chown "\${USERNAME}":"\${USERNAME}" "\${HOMEDIR}/.profile"
 chmod 0644 "\${HOMEDIR}/.profile"
 
 rc-update del initial-setup default
