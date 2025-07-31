@@ -19,13 +19,17 @@ https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-a
 
 ## List of Alpine branches
 
-To provide argument to `--branch` for the `alpine-make-vm-image` script,
-which in my version of this, is required (just to get a good filename).
+UPDATE: the `build-image.sh` gets the latest explicit version number
+using lynx and a bunch of other stuff.
+
+~~To provide argument to `--branch` for the `alpine-make-vm-image` script,
+which in my version of this, is required (just to get a good
+filename).~~
+
+You can still check to see if the latest built image is up-to-date or
+not by checking here:
 
 https://alpinelinux.org/releases/
-
-(UPDATE: the `build-image.sh` gets the latest explicit version number
-using lynx and a bunch of other stuff.)
 
 ## Dealing with the git submodule
 
