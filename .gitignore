@@ -2,4 +2,5 @@
 *.sw?
 *.vim
 alpine-virt-image-*
+alpine-local-image-*
 /misc
