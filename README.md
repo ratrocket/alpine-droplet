@@ -7,6 +7,8 @@ Forked from https://github.com/benpye/alpine-droplet.  There's an
 that goes along with this repo.  ([Archive
 link](https://web.archive.org/web/20240222015631/https://curlybracket.co.uk/blog/running-alpine-linux-on-digital-ocean/))
 
+(Article also reproduced in the repo in the `doc/` directory.)
+
 ## Deprectation warning in Github Action
 
 Using "set-output" is deprecated, but they're delaying its removal, so
